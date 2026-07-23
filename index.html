@@ -1,1047 +1,860 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="ASPRORIOS - Associação de Produtores Agroextrativistas do Rio Barbosa. Distrito de Itatupã, Gurupá - PA.">
-<meta name="keywords" content="ASPRORIOS, agroextrativismo, Rio Barbosa, Itatupã, Gurupá, Pará, Amazônia, castanha, cacau, manejo florestal">
-<title>ASPRORIOS - Associação de Produtores Agroextrativistas do Rio Barbosa</title>
-<style>
-  :root {
-    --primary: #1a4d2e;
-    --primary-light: #2d6a3f;
-    --accent: #c9a227;
-    --river: #4a7c59;
-    --bg: #f5f7f4;
-    --card: #ffffff;
-    --text: #1e2e1e;
-    --text-light: #5a6b5a;
-    --border: #d8e0d8;
-    --success: #2e7d32;
-    --danger: #b71c1c;
-    --wood: #8b6914;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
-  body { background: var(--bg); color: var(--text); line-height: 1.6; }
-  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASPRORIOS - Associação de Produtores Agroextrativistas do Rio Barbosa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  header {
-    background: linear-gradient(135deg, #0d2b1a 0%, var(--primary) 50%, var(--river) 100%);
-    color: white;
-    padding: 60px 0 50px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute;
-    top: -40%;
-    right: -10%;
-    width: 500px;
-    height: 500px;
-    background: rgba(255,255,255,0.03);
-    border-radius: 50%;
-  }
-  header h1 { font-size: 2.4rem; margin-bottom: 6px; font-weight: 800; letter-spacing: 1px; }
-  header .subtitle { font-size: 1.05rem; opacity: 0.85; max-width: 720px; margin: 0 auto; line-height: 1.5; }
-  .header-badges { margin-top: 22px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-  .badge {
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    padding: 7px 16px;
-    border-radius: 50px;
-    font-size: 0.82rem;
-    border: 1px solid rgba(255,255,255,0.15);
-  }
-  .location-bar {
-    background: rgba(0,0,0,0.25);
-    margin-top: 20px;
-    padding: 10px 20px;
-    border-radius: 10px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.88rem;
-  }
+        :root {
+            --verde-floresta: #2d5a27;
+            --verde-claro: #4a7c43;
+            --marrom-terra: #8b6914;
+            --areia: #f4f1e8;
+            --texto: #333;
+            --branco: #ffffff;
+        }
 
-  nav {
-    background: var(--card);
-    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .nav-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 20px;
-  }
-  .logo { font-weight: 800; color: var(--primary); font-size: 1.15rem; letter-spacing: 0.5px; }
-  .nav-links { display: flex; gap: 3px; }
-  .nav-links button {
-    background: none;
-    border: none;
-    padding: 9px 14px;
-    cursor: pointer;
-    color: var(--text);
-    font-size: 0.88rem;
-    border-radius: 8px;
-    transition: all 0.3s;
-    font-weight: 500;
-  }
-  .nav-links button:hover, .nav-links button.active {
-    background: var(--primary);
-    color: white;
-  }
-  .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--primary); }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--texto);
+            line-height: 1.6;
+        }
 
-  .section { display: none; padding: 45px 0; animation: fadeIn 0.4s ease; }
-  .section.active { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Navegação */
+        nav {
+            background: linear-gradient(135deg, var(--verde-floresta) 0%, var(--verde-claro) 100%);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
 
-  .section-title {
-    font-size: 1.9rem;
-    color: var(--primary);
-    margin-bottom: 8px;
-    text-align: center;
-  }
-  .section-subtitle {
-    text-align: center;
-    color: var(--text-light);
-    margin-bottom: 35px;
-    font-size: 1rem;
-  }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-  .hero-media {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto 40px;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.15);
-    border: 1px solid var(--border);
-    position: relative;
-  }
-  .hero-media img, .hero-media video {
-    width: 100%;
-    display: block;
-    object-fit: cover;
-  }
-  .hero-caption {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.7));
-    color: white;
-    padding: 30px 20px 15px;
-    font-size: 0.9rem;
-  }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--branco);
+            text-decoration: none;
+        }
 
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 15px;
-    margin-top: 25px;
-  }
-  .gallery-item {
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    border: 1px solid var(--border);
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-    position: relative;
-  }
-  .gallery-item:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); }
-  .gallery-item img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    display: block;
-  }
-  .gallery-caption {
-    padding: 10px 12px;
-    background: var(--card);
-    font-size: 0.82rem;
-    color: var(--text-light);
-    text-align: center;
-  }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
 
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-    gap: 22px;
-    margin-top: 25px;
-  }
-  .card {
-    background: var(--card);
-    border-radius: 16px;
-    padding: 25px;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.05);
-    border: 1px solid var(--border);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.09); }
-  .card-icon {
-    width: 48px; height: 48px;
-    background: linear-gradient(135deg, var(--primary), var(--primary-light));
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    color: white; font-size: 1.3rem; margin-bottom: 14px;
-  }
-  .card h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--primary); }
-  .card p { color: var(--text-light); line-height: 1.6; font-size: 0.9rem; }
+        .nav-menu a {
+            color: var(--branco);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
 
-  .stats-bar {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 18px;
-    margin: 35px 0;
-  }
-  .stat-box {
-    background: var(--card);
-    padding: 22px;
-    border-radius: 14px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    border: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-  }
-  .stat-box::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-  }
-  .stat-number { font-size: 2.2rem; font-weight: 800; color: var(--primary); }
-  .stat-label { color: var(--text-light); font-size: 0.85rem; margin-top: 4px; }
+        .nav-menu a:hover {
+            opacity: 0.8;
+        }
 
-  .news-list, .events-list { display: flex; flex-direction: column; gap: 16px; }
-  .news-item, .event-item {
-    background: var(--card);
-    border-radius: 14px;
-    padding: 20px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-    border: 1px solid var(--border);
-    display: flex; gap: 16px; align-items: flex-start;
-  }
-  .news-date, .event-date {
-    min-width: 60px;
-    text-align: center;
-    background: var(--primary);
-    color: white;
-    border-radius: 10px;
-    padding: 8px 6px;
-  }
-  .news-date .day, .event-date .day { font-size: 1.3rem; font-weight: 700; display: block; }
-  .news-date .month, .event-date .month { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1px; }
-  .news-content h4, .event-content h4 { color: var(--primary); margin-bottom: 5px; font-size: 1rem; }
-  .news-content p, .event-content p { color: var(--text-light); font-size: 0.88rem; line-height: 1.5; }
-  .tag {
-    display: inline-block;
-    background: rgba(201,162,39,0.13);
-    color: #7a5f15;
-    padding: 3px 10px;
-    border-radius: 50px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    margin-top: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--branco);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
 
-  .table-container {
-    background: var(--card);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.05);
-    border: 1px solid var(--border);
-  }
-  .table-toolbar {
-    padding: 16px;
-    display: flex; gap: 10px; flex-wrap: wrap;
-    border-bottom: 1px solid var(--border);
-    background: #f8faf8;
-  }
-  .table-toolbar input, .table-toolbar select {
-    padding: 9px 13px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    font-size: 0.85rem;
-    outline: none;
-    transition: border 0.3s;
-    background: white;
-  }
-  .table-toolbar input:focus, .table-toolbar select:focus { border-color: var(--primary); }
-  .btn {
-    padding: 9px 18px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 600;
-    transition: all 0.3s;
-  }
-  .btn-primary { background: var(--primary); color: white; }
-  .btn-primary:hover { background: var(--primary-light); }
-  .btn-success { background: var(--success); color: white; }
-  .btn-danger { background: var(--danger); color: white; }
+        /* Hero Section com Imagem do Rio */
+        .hero {
+            margin-top: 70px;
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('rio-barbosa.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--branco);
+        }
 
-  table { width: 100%; border-collapse: collapse; }
-  th, td { padding: 12px 16px; text-align: left; }
-  th { background: #eef3ee; color: var(--primary); font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; }
-  tr { border-bottom: 1px solid var(--border); transition: background 0.2s; }
-  tr:hover { background: #f8faf8; }
-  td { font-size: 0.88rem; color: var(--text); }
-  .status-badge {
-    padding: 3px 10px;
-    border-radius: 50px;
-    font-size: 0.72rem;
-    font-weight: 600;
-  }
-  .status-ativo { background: rgba(46,125,50,0.12); color: var(--success); }
-  .status-inativo { background: rgba(183,28,28,0.12); color: var(--danger); }
-  .status-pendente { background: rgba(201,162,39,0.13); color: #7a5f15; }
+        .hero-content {
+            max-width: 900px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease;
+        }
 
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-  .contact-info { display: flex; flex-direction: column; gap: 14px; }
-  .contact-item {
-    display: flex; align-items: center; gap: 12px;
-    padding: 16px;
-    background: var(--card);
-    border-radius: 14px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-    border: 1px solid var(--border);
-  }
-  .contact-item .icon {
-    width: 42px; height: 42px;
-    background: linear-gradient(135deg, var(--primary), var(--primary-light));
-    border-radius: 11px;
-    display: flex; align-items: center; justify-content: center;
-    color: white; font-size: 1.05rem;
-  }
-  .contact-form {
-    background: var(--card);
-    padding: 28px;
-    border-radius: 16px;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.05);
-    border: 1px solid var(--border);
-  }
-  .form-group { margin-bottom: 16px; }
-  .form-group label { display: block; margin-bottom: 6px; font-weight: 600; color: var(--text); font-size: 0.85rem; }
-  .form-group input, .form-group textarea, .form-group select {
-    width: 100%;
-    padding: 11px 13px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    font-size: 0.9rem;
-    outline: none;
-    transition: border 0.3s;
-    font-family: inherit;
-    background: #fafbfa;
-  }
-  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--primary); background: white; }
-  .form-group textarea { resize: vertical; min-height: 100px; }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: 700;
+        }
 
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.55);
-    z-index: 200;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(5px);
-  }
-  .modal-overlay.active { display: flex; }
-  .modal {
-    background: var(--card);
-    border-radius: 18px;
-    padding: 28px;
-    width: 90%;
-    max-width: 460px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-    animation: modalIn 0.3s ease;
-    position: relative;
-  }
-  @keyframes modalIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-  .modal h3 { margin-bottom: 20px; color: var(--primary); font-size: 1.25rem; }
-  .modal-close {
-    position: absolute;
-    top: 12px; right: 16px;
-    background: none; border: none;
-    font-size: 1.3rem; cursor: pointer;
-    color: var(--text-light);
-  }
-  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
 
-  .lightbox-overlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.9);
-    z-index: 300;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(8px);
-  }
-  .lightbox-overlay.active { display: flex; }
-  .lightbox-img {
-    max-width: 90%;
-    max-height: 85vh;
-    border-radius: 12px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    animation: modalIn 0.3s ease;
-  }
-  .lightbox-close {
-    position: absolute;
-    top: 20px; right: 30px;
-    background: none; border: none;
-    font-size: 2.5rem; cursor: pointer;
-    color: white;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-  }
-  .lightbox-caption {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    background: rgba(0,0,0,0.6);
-    padding: 10px 24px;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    backdrop-filter: blur(4px);
-  }
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
 
-  footer {
-    background: var(--primary);
-    color: white;
-    padding: 40px 0 18px;
-    margin-top: 50px;
-  }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 25px;
-    margin-bottom: 25px;
-  }
-  .footer-col h4 { margin-bottom: 12px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-  .footer-col p, .footer-col a { color: rgba(255,255,255,0.7); font-size: 0.85rem; line-height: 1.8; text-decoration: none; display: block; }
-  .footer-col a:hover { color: white; }
-  .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 18px;
-    text-align: center;
-    color: rgba(255,255,255,0.5);
-    font-size: 0.8rem;
-  }
+        .hero-badges {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
 
-  .toast {
-    position: fixed;
-    bottom: 22px;
-    right: 22px;
-    background: var(--success);
-    color: white;
-    padding: 13px 22px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    transform: translateY(100px);
-    opacity: 0;
-    transition: all 0.4s ease;
-    z-index: 400;
-    font-weight: 500;
-    font-size: 0.9rem;
-  }
-  .toast.show { transform: translateY(0); opacity: 1; }
-  .toast.error { background: var(--danger); }
+        .badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
 
-  @media (max-width: 768px) {
-    header h1 { font-size: 1.7rem; }
-    header .subtitle { font-size: 0.95rem; }
-    .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--card); flex-direction: column; padding: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-    .nav-links.active { display: flex; }
-    .mobile-menu-btn { display: block; }
-    .contact-grid { grid-template-columns: 1fr; }
-    .news-item, .event-item { flex-direction: column; }
-    .table-toolbar { flex-direction: column; }
-    .table-toolbar input, .table-toolbar select, .table-toolbar .btn { width: 100%; }
-    table { font-size: 0.75rem; }
-    th, td { padding: 9px; }
-    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-    .gallery-item img { height: 140px; }
-  }
-</style>
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--verde-claro);
+            color: var(--branco);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .btn:hover {
+            background: transparent;
+            border-color: var(--branco);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border-color: var(--branco);
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--branco);
+            color: var(--verde-floresta);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--areia);
+            padding: 4rem 2rem;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem;
+            background: var(--branco);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--verde-floresta);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--texto);
+            margin-top: 0.5rem;
+        }
+
+        /* Atividades */
+        .atividades {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--verde-floresta);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        .atividades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .atividade-card {
+            background: var(--branco);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border-top: 4px solid var(--verde-claro);
+        }
+
+        .atividade-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .atividade-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .atividade-card h3 {
+            color: var(--verde-floresta);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Sobre */
+        .sobre {
+            background: linear-gradient(135deg, var(--verde-floresta) 0%, var(--verde-claro) 100%);
+            color: var(--branco);
+            padding: 5rem 2rem;
+        }
+
+        .sobre-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .sobre-imagem {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .sobre-imagem img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .sobre-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sobre-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .valores-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .valor-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .valor-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Galeria */
+        .galeria {
+            padding: 5rem 2rem;
+            background: var(--areia);
+        }
+
+        .galeria-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .galeria-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 250px;
+            cursor: pointer;
+        }
+
+        .galeria-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .galeria-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .galeria-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 2rem 1rem 1rem;
+            color: var(--branco);
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .galeria-item:hover .galeria-overlay {
+            transform: translateY(0);
+        }
+
+        /* Contato */
+        .contato {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contato-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contato-info h3 {
+            color: var(--verde-floresta);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contato-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contato-icon {
+            font-size: 1.5rem;
+            color: var(--verde-claro);
+        }
+
+        .contato-form {
+            background: var(--branco);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--verde-floresta);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--verde-claro);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--verde-floresta);
+            color: var(--branco);
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--branco);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+
+            .sobre-container,
+            .contato-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .valores-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<header style="background: url('pagina1.jpeg') center/cover no-repeat; position: relative;">
-  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(13,43,26,0.85) 0%, rgba(26,77,46,0.8) 50%, rgba(45,106,63,0.75) 100%);"></div>
-  <div class="container" style="position: relative; z-index: 1;">
-    <h1>🌿 ASPRORIOS</h1>
-    <p class="subtitle">Associação de Produtores Agroextrativistas do Rio Barbosa<br>Distrito de Itatupã — Gurupá, Pará</p>
-    <div class="header-badges">
-      <span class="badge">🌳 Extrativismo Sustentável</span>
-      <span class="badge">🤝 Famílias do Rio</span>
-      <span class="badge">🌎 Amazônia Paraense</span>
-    </div>
-    <div class="location-bar">
-      📍 Itatupã, Gurupá — PA, CEP 68300-000
-    </div>
-  </div>
-</header>
-
-<nav>
-  <div class="container nav-content">
-    <div class="logo">🌿 ASPRORIOS</div>
-    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
-    <div class="nav-links" id="navLinks">
-      <button class="active" onclick="showSection('home', this)">🏠 Início</button>
-      <button onclick="showSection('about', this)">ℹ️ Sobre</button>
-      <button onclick="showSection('gallery', this)">📸 Galeria</button>
-      <button onclick="showSection('news', this)">📰 Notícias</button>
-      <button onclick="showSection('events', this)">📅 Eventos</button>
-      <button onclick="showSection('members', this)">👥 Associados</button>
-      <button onclick="showSection('contact', this)">📞 Contato</button>
-    </div>
-  </div>
-</nav>
-
-<section id="home" class="section active">
-  <div class="container">
-    <div class="stats-bar">
-      <div class="stat-box">
-        <div class="stat-number" id="statMembers">0</div>
-        <div class="stat-label">Famílias Associadas</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-number" id="statArea">0</div>
-        <div class="stat-label">Hectares Manejados</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-number" id="statYears">0</div>
-        <div class="stat-label">Anos de Atuação</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-number" id="statProducts">0</div>
-        <div class="stat-label">Produtos Certificados</div>
-      </div>
-    </div>
-
-    <h2 class="section-title">Nossas Atividades</h2>
-    <p class="section-subtitle">Trabalhando em harmonia com a floresta amazônica</p>
-    <div class="cards-grid">
-      <div class="card">
-        <div class="card-icon">🌰</div>
-        <h3>Castanha-do-Pará</h3>
-        <p>Coleta e beneficiamento sustentável de castanha-do-pará, garantindo renda para as famílias associadas e preservação das castanheiras nativas do Rio Barbosa.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🍫</div>
-        <h3>Cacau Amazônico</h3>
-        <p>Produção de cacau fino de aroma, cultivado sob a sombra da floresta, com processamento artesanal que valoriza o sabor único da Amazônia.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🪵</div>
-        <h3>Manejo Florestal</h3>
-        <p>Exploração sustentável de madeiras nobres com Plano de Manejo aprovado pelo IBAMA, respeitando os ciclos naturais de regeneração da floresta.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🐟</div>
-        <h3>Pesca Artesanal</h3>
-        <p>Pesca sustentável no Rio Barbosa e igarapés, com respeito aos períodos de defeso e preservação dos estoques pesqueiros para as gerações futuras.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🌿</div>
-        <h3>Óleos e Essências</h3>
-        <p>Extração de óleos vegetais e essências naturais de plantas amazônicas, como andiroba, copaíba e breu, com aplicações medicinais e cosméticas.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🍇</div>
-        <h3>Frutas Nativas</h3>
-        <p>Coleta e comercialização de frutas amazônicas como açaí, cupuaçu, bacuri e buriti, valorizando a biodiversidade e a cultura local do Baixo Amazonas.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="about" class="section">
-  <div class="container">
-    <h2 class="section-title">Sobre a ASPRORIOS</h2>
-    <p class="section-subtitle">Nossa história, missão e compromisso com a floresta</p>
-
-    <div class="hero-media" style="margin-bottom: 30px;">
-      <img src="foto3.jpeg,nova1.jpeg" alt="Reunião comunitária da ASPRORIOS — Itatupã, Gurupá-PA" style="max-height: 380px; width: 100%; object-fit: cover;">
-      <div class="hero-caption">🤝 Reunião comunitária da ASPRORIOS — Itatupã, Gurupá-PA</div>
-    </div>
-
-    <div class="cards-grid" style="grid-template-columns: 1fr;">
-      <div class="card" style="display: flex; gap: 24px; align-items: flex-start;">
-        <div style="font-size: 3rem;">🌳</div>
-        <div>
-          <h3>Nossa História</h3>
-          <p style="margin-top: 10px;">A ASPRORIOS foi fundada por famílias tradicionais do Distrito de Itatupã, no município de Gurupá, com o objetivo de organizar a produção agroextrativista da região do Rio Barbosa. Localizada no coração da Amazônia Paraense, a associação reúne produtores que vivem em harmonia com a floresta, mantendo práticas ancestrais de manejo sustentável.</p>
-          <p style="margin-top: 12px;">Ao longo dos anos, a ASPRORIOS conquistou certificações de manejo sustentável, firmou parcerias com órgãos ambientais e se tornou referência em agroextrativismo na região do Baixo Amazonas, conectando as famílias do rio aos mercados justos.</p>
+    <!-- Navegação -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">🌿 ASPRORIOS</a>
+            <ul class="nav-menu">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#atividades">Atividades</a></li>
+                <li><a href="#galeria">Galeria</a></li>
+                <li><a href="#noticias">Notícias</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <button class="menu-toggle">☰</button>
         </div>
-      </div>
-    </div>
+    </nav>
 
-    <div class="cards-grid" style="margin-top: 25px;">
-      <div class="card">
-        <div class="card-icon">🎯</div>
-        <h3>Missão</h3>
-        <p>Organizar e fortalecer as famílias produtoras do Rio Barbosa na comercialização sustentável de produtos da floresta, garantindo renda digna e preservação ambiental.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">👁️</div>
-        <h3>Visão</h3>
-        <p>Ser reconhecida como principal associação agroextrativista da região do Baixo Amazonas, referência em manejo sustentável e justiça socioambiental.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">💎</div>
-        <h3>Valores</h3>
-        <p>Respeito à floresta, transparência na gestão, solidariedade entre associados, valorização do conhecimento tradicional e compromisso com as futuras gerações.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="gallery" class="section">
-  <div class="container">
-    <h2 class="section-title">Galeria de Fotos</h2>
-    <p class="section-subtitle">O cotidiano das famílias agroextrativistas do Rio Barbosa</p>
-
-    <div class="gallery-grid">
-      <div class="gallery-item" onclick="openLightbox('pagina1.jpeg', 'Rio Barbosa — Canoas no porto de Itatupã')">
-        <img src="pagina1.jpeg" alt="Rio Barbosa">
-        <div class="gallery-caption">🛶 Rio Barbosa</div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('foto2.jpeg', 'Rio Juruparí — Deslocamento das famílias')">
-        <img src="foto2.jpeg" alt="Rio Juruparí">
-        <div class="gallery-caption">🚤 Rio Juruparí</div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('foto3.jpeg','nova1.jpeg' 'Reunião comunitária da ASPRORIOS')">
-        <img src="foto3.jpeg,nova1.jpeg" alt="Reunião ASPRORIOS">
-        <div class="gallery-caption">🤝 Reunião Comunitária</div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('foto4.jpeg', 'Oficina de artesanato e sociobiodiversidade')">
-        <img src="foto4.jpeg" alt="Oficina ASPRORIOS">
-        <div class="gallery-caption">🧺 Oficina de Artesanato</div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('foto5.jpeg', 'Famílias no Rio Barbosa')">
-        <img src="foto5.jpeg" alt="Famílias no rio">
-        <div class="gallery-caption">👨‍👩‍👧‍👦 Famílias no Rio</div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('foto6.jpeg', 'Visita técnica às comunidades ribeirinhas')">
-        <img src="foto6.jpeg" alt="Visita técnica">
-        <div class="gallery-caption">🌿 Visita Técnica</div>
-      </div>
-    </div>
-
-    <div class="hero-media" style="margin-top: 35px;">
-      <video controls style="width: 100%; max-height: 420px; display: block;" poster="pagina1.jpeg">
-        <source src="video1.mp4" type="video/mp4">
-        Seu navegador não suporta vídeo.
-      </video>
-      <div class="hero-caption">🎬 Deslocamento das famílias pelo Rio Barbosa — Itatupã, Gurupá-PA</div>
-    </div>
-  </div>
-</section>
-
-<section id="news" class="section">
-  <div class="container">
-    <h2 class="section-title">Notícias e Comunicados</h2>
-    <p class="section-subtitle">Fique por dentro das novidades da ASPRORIOS</p>
-    <div class="news-list" id="newsList"></div>
-  </div>
-</section>
-
-<section id="events" class="section">
-  <div class="container">
-    <h2 class="section-title">Próximos Eventos</h2>
-    <p class="section-subtitle">Participe das nossas atividades e fortaleça a comunidade</p>
-    <div class="events-list" id="eventsList"></div>
-  </div>
-</section>
-
-<section id="members" class="section">
-  <div class="container">
-    <h2 class="section-title">Gestão de Associados</h2>
-    <p class="section-subtitle">Cadastre, consulte e gerencie as famílias associadas à ASPRORIOS</p>
-
-    <div class="table-container">
-      <div class="table-toolbar">
-        <input type="text" id="searchMember" placeholder="🔍 Buscar por nome..." onkeyup="filterMembers()">
-        <select id="filterStatus" onchange="filterMembers()">
-          <option value="">Todos os status</option>
-          <option value="ativo">Ativo</option>
-          <option value="inativo">Inativo</option>
-          <option value="pendente">Pendente</option>
-        </select>
-        <button class="btn btn-primary" onclick="openModal()">➕ Novo Associado</button>
-      </div>
-      <div style="overflow-x: auto;">
-        <table>
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>E-mail</th>
-              <th>Telefone</th>
-              <th>Desde</th>
-              <th>Status</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody id="membersTable"></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="contact" class="section">
-  <div class="container">
-    <h2 class="section-title">Entre em Contato</h2>
-    <p class="section-subtitle">Quer se associar, tirar dúvidas ou propor uma parceria? Fale conosco!</p>
-
-    <div class="contact-grid">
-      <div class="contact-info">
-        <div class="contact-item">
-          <div class="icon">📍</div>
-          <div>
-            <strong>Endereço</strong>
-            <p style="color: var(--text-light); font-size: 0.85rem;">Distrito de Itatupã<br>Gurupá — PA, CEP 68300-000</p>
-          </div>
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>ASPRORIOS</h1>
+            <p class="hero-subtitle">Associação de Produtores Agroextrativistas do Rio Barbosa</p>
+            <div class="hero-badges">
+                <span class="badge">🌳 Extrativismo Sustentável</span>
+                <span class="badge">🤝 Famílias do Rio</span>
+                <span class="badge">🌎 Amazônia Paraense</span>
+            </div>
+            <p class="hero-description">
+                Unindo famílias em defesa da floresta e da vida digna na Amazônia. 
+                Trabalhamos em harmonia com a natureza, preservando o Rio Barbosa e suas tradições.
+            </p>
+            <div>
+                <a href="#contato" class="btn">Conheça Nosso Trabalho</a>
+                <a href="#sobre" class="btn btn-outline">Saiba Mais</a>
+            </div>
         </div>
-        <div class="contact-item">
-          <div class="icon">📞</div>
-          <div>
-            <strong>Telefone</strong>
-            <p style="color: var(--text-light); font-size: 0.85rem;">(91) 0000-0000<br>Seg–Sex, 8h às 17h</p>
-          </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <span class="stat-number">150+</span>
+                <div class="stat-label">Famílias Associadas</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">5.000</span>
+                <div class="stat-label">Hectares Manejados</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">15</span>
+                <div class="stat-label">Anos de Atuação</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">12</span>
+                <div class="stat-label">Produtos Certificados</div>
+            </div>
         </div>
-        <div class="contact-item">
-          <div class="icon">✉️</div>
-          <div>
-            <strong>E-mail</strong>
-            <p style="color: var(--text-light); font-size: 0.85rem;">asprorios@email.com<br>contato@asprorios.org</p>
-          </div>
+    </section>
+
+    <!-- Atividades -->
+    <section class="atividades" id="atividades">
+        <h2 class="section-title">Nossas Atividades</h2>
+        <p class="section-subtitle">Trabalhando em harmonia com a floresta amazônica</p>
+        
+        <div class="atividades-grid">
+            <div class="atividade-card">
+                <div class="atividade-icon"></div>
+                <h3>Castanha-do-Pará</h3>
+                <p>Coleta e beneficiamento sustentável de castanha-do-pará, garantindo renda para as famílias associadas e preservação das castanheiras nativas do Rio Barbosa.</p>
+            </div>
+
+            <div class="atividade-card">
+                <div class="atividade-icon">🍫</div>
+                <h3>Cacau Amazônico</h3>
+                <p>Produção de cacau fino de aroma, cultivado sob a sombra da floresta, com processamento artesanal que valoriza o sabor único da Amazônia.</p>
+            </div>
+
+            <div class="atividade-card">
+                <div class="atividade-icon">🪵</div>
+                <h3>Manejo Florestal</h3>
+                <p>Exploração sustentável de madeiras nobres com Plano de Manejo aprovado pelo IBAMA, respeitando os ciclos naturais de regeneração da floresta.</p>
+            </div>
+
+            <div class="atividade-card">
+                <div class="atividade-icon"></div>
+                <h3>Pesca Artesanal</h3>
+                <p>Pesca sustentável no Rio Barbosa e igarapés, com respeito aos períodos de defeso e preservação dos estoques pesqueiros para as gerações futuras.</p>
+            </div>
+
+            <div class="atividade-card">
+                <div class="atividade-icon">🌿</div>
+                <h3>Óleos e Essências</h3>
+                <p>Extração de óleos vegetais e essências naturais de plantas amazônicas, como andiroba, copaíba e breu, com aplicações medicinais e cosméticas.</p>
+            </div>
+
+            <div class="atividade-card">
+                <div class="atividade-icon"></div>
+                <h3>Frutas Nativas</h3>
+                <p>Coleta e comercialização de frutas amazônicas como açaí, cupuaçu, bacuri e buriti, valorizando a biodiversidade e a cultura local do Baixo Amazonas.</p>
+            </div>
         </div>
-        <div class="contact-item">
-          <div class="icon">🌐</div>
-          <div>
-            <strong>Redes Sociais</strong>
-            <p style="color: var(--text-light); font-size: 0.85rem;">@asprorios (Instagram, Facebook)</p>
-          </div>
+    </section>
+
+    <!-- Sobre -->
+    <section class="sobre" id="sobre">
+        <div class="sobre-container">
+            <div class="sobre-content">
+                <h2>Sobre a ASPRORIOS</h2>
+                <p>A ASPRORIOS foi fundada por famílias tradicionais do Distrito de Itatupã, no município de Gurupá, com o objetivo de organizar a produção agroextrativista da região do Rio Barbosa.</p>
+                <p>Localizada no coração da Amazônia Paraense, a associação reúne produtores que vivem em harmonia com a floresta, mantendo práticas ancestrais de manejo sustentável.</p>
+                
+                <div class="valores-grid">
+                    <div class="valor-item">
+                        <h4>🎯 Missão</h4>
+                        <p>Organizar e fortalecer as famílias produtoras</p>
+                    </div>
+                    <div class="valor-item">
+                        <h4>👁️ Visão</h4>
+                        <p>Ser referência em manejo sustentável</p>
+                    </div>
+                    <div class="valor-item">
+                        <h4>💎 Valores</h4>
+                        <p>Respeito à floresta e transparência</p>
+                    </div>
+                </div>
+            </div>
+            <div class="sobre-imagem">
+                <img src="reuniao-comunitaria.jpg" alt="Reunião comunitária da ASPRORIOS — Itatupã, Gurupá-PA">
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="contact-form">
-        <h3 style="margin-bottom: 16px; color: var(--primary);">Envie uma mensagem</h3>
-        <div class="form-group">
-          <label>Nome completo</label>
-          <input type="text" id="contactName" placeholder="Seu nome">
+    <!-- Galeria -->
+    <section class="galeria" id="galeria">
+        <div class="galeria-container">
+            <h2 class="section-title">Galeria de Fotos</h2>
+            <p class="section-subtitle">O cotidiano das famílias agroextrativistas do Rio Barbosa</p>
+            
+            <div class="galeria-grid">
+                <div class="galeria-item">
+                    <img src="rio-barbosa.jpg" alt="Rio Barbosa">
+                    <div class="galeria-overlay">Rio Barbosa</div>
+                </div>
+                <div class="galeria-item">
+                    <img src="rio-jurupari.jpg" alt="Rio Juruparí">
+                    <div class="galeria-overlay">Rio Juruparí</div>
+                </div>
+                <div class="galeria-item">
+                    <img src="reuniao.jpg" alt="Reunião Comunitária">
+                    <div class="galeria-overlay">Reunião Comunitária</div>
+                </div>
+                <div class="galeria-item">
+                    <img src="artesanato.jpg" alt="Oficina de Artesanato">
+                    <div class="galeria-overlay">Oficina de Artesanato</div>
+                </div>
+                <div class="galeria-item">
+                    <img src="familias.jpg" alt="Famílias no Rio">
+                    <div class="galeria-overlay">Famílias no Rio</div>
+                </div>
+                <div class="galeria-item">
+                    <img src="visita-tecnica.jpg" alt="Visita Técnica">
+                    <div class="galeria-overlay">Visita Técnica</div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-          <label>E-mail</label>
-          <input type="email" id="contactEmail" placeholder="seu@email.com">
+    </section>
+
+    <!-- Contato -->
+    <section class="contato" id="contato">
+        <h2 class="section-title">Entre em Contato</h2>
+        <p class="section-subtitle">Quer se associar, tirar dúvidas ou propor uma parceria? Fale conosco!</p>
+        
+        <div class="contato-grid">
+            <div class="contato-info">
+                <h3>Informações de Contato</h3>
+                
+                <div class="contato-item">
+                    <span class="contato-icon">📍</span>
+                    <div>
+                        <strong>Endereço</strong>
+                        <p>Distrito de Itatupã<br>Gurupá — PA, CEP 68300-000</p>
+                    </div>
+                </div>
+
+                <div class="contato-item">
+                    <span class="contato-icon">📞</span>
+                    <div>
+                        <strong>Telefone</strong>
+                        <p>(91) 0000-0000<br>Seg–Sex, 8h às 17h</p>
+                    </div>
+                </div>
+
+                <div class="contato-item">
+                    <span class="contato-icon">✉️</span>
+                    <div>
+                        <strong>E-mail</strong>
+                        <p>asprorios@email.com<br>contato@asprorios.org</p>
+                    </div>
+                </div>
+
+                <div class="contato-item">
+                    <span class="contato-icon">🌐</span>
+                    <div>
+                        <strong>Redes Sociais</strong>
+                        <p>@asprorios (Instagram, Facebook)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contato-form">
+                <form>
+                    <div class="form-group">
+                        <label for="nome">Nome completo *</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assunto">Assunto</label>
+                        <select id="assunto" name="assunto">
+                            <option value="associar">Quero me associar</option>
+                            <option value="produtos">Interesse em produtos</option>
+                            <option value="parceria">Proposta de parceria</option>
+                            <option value="certificacao">Dúvida sobre certificação</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem" rows="5"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer;">
+                        📨 Enviar Mensagem
+                    </button>
+                </form>
+            </div>
         </div>
-        <div class="form-group">
-          <label>Assunto</label>
-          <select id="contactSubject">
-            <option>Quero me associar</option>
-            <option>Interesse em produtos</option>
-            <option>Proposta de parceria</option>
-            <option>Dúvida sobre certificação</option>
-            <option>Outro</option>
-          </select>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3> ASPRORIOS</h3>
+                <p>Associação de Produtores Agroextrativistas do Rio Barbosa, unindo famílias em defesa da floresta e da vida digna na Amazônia.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Links Rápidos</h3>
+                <p><a href="#sobre">Sobre Nós</a></p>
+                <p><a href="#galeria">Galeria</a></p>
+                <p><a href="#atividades">Atividades</a></p>
+                <p><a href="#contato">Contato</a></p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p>📍 Itatupã, Gurupá — PA</p>
+                <p>📞 (91) 0000-0000</p>
+                <p>✉️ asprorios@email.com</p>
+            </div>
         </div>
-        <div class="form-group">
-          <label>Mensagem</label>
-          <textarea id="contactMessage" placeholder="Escreva sua mensagem..."></textarea>
+
+        <div class="footer-bottom">
+            <p>© 2026 ASPRORIOS — Associação de Produtores Agroextrativistas do Rio Barbosa. Todos os direitos reservados.</p>
         </div>
-        <button class="btn btn-primary" style="width: 100%; padding: 13px;" onclick="sendContact()">📨 Enviar Mensagem</button>
-      </div>
-    </div>
-  </div>
-</section>
+    </footer>
 
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <h4>🌿 ASPRORIOS</h4>
-        <p>Associação de Produtores Agroextrativistas do Rio Barbosa, unindo famílias em defesa da floresta e da vida digna na Amazônia.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Links Rápidos</h4>
-        <a href="#" onclick="showSection('about', null); return false;">Sobre Nós</a>
-        <a href="#" onclick="showSection('gallery', null); return false;">Galeria</a>
-        <a href="#" onclick="showSection('events', null); return false;">Eventos</a>
-        <a href="#" onclick="showSection('members', null); return false;">Área do Associado</a>
-        <a href="#" onclick="showSection('contact', null); return false;">Contato</a>
-      </div>
-      <div class="footer-col">
-        <h4>Contato</h4>
-        <p>📍 Itatupã, Gurupá — PA</p>
-        <p>📞 (91) 0000-0000</p>
-        <p>✉️ asprorios@email.com</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      © 2026 ASPRORIOS — Associação de Produtores Agroextrativistas do Rio Barbosa. Todos os direitos reservados.
-    </div>
-  </div>
-</footer>
+    <script>
+        // Menu Mobile
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        });
 
-<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <h3>➕ Cadastrar Novo Associado</h3>
-    <div class="form-group">
-      <label>Nome completo *</label>
-      <input type="text" id="newName" placeholder="Nome do associado">
-    </div>
-    <div class="form-group">
-      <label>E-mail *</label>
-      <input type="email" id="newEmail" placeholder="email@exemplo.com">
-    </div>
-    <div class="form-group">
-      <label>Telefone</label>
-      <input type="tel" id="newPhone" placeholder="(91) 00000-0000">
-    </div>
-    <div class="form-group">
-      <label>Status</label>
-      <select id="newStatus">
-        <option value="ativo">Ativo</option>
-        <option value="pendente">Pendente</option>
-        <option value="inativo">Inativo</option>
-      </select>
-    </div>
-    <div class="modal-actions">
-      <button class="btn" style="background: var(--border); color: var(--text);" onclick="closeModal()">Cancelar</button>
-      <button class="btn btn-success" onclick="addMember()">Salvar Associado</button>
-    </div>
-  </div>
-</div>
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-<div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
-  <button class="lightbox-close">✕</button>
-  <img class="lightbox-img" id="lightboxImg" src="" alt="">
-  <div class="lightbox-caption" id="lightboxCaption"></div>
-</div>
+        // Animação ao scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-<div class="toast" id="toast"></div>
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
 
-<script>
-let members = [
-  { id: 1, name: "Sebastião Mendes da Silva", email: "sebastiao.m@email.com", phone: "(91) 98765-4321", since: "2018-03-15", status: "ativo" },
-  { id: 2, name: "Maria das Graças Oliveira", email: "maria.gracas@email.com", phone: "(91) 91234-5678", since: "2019-07-22", status: "ativo" },
-  { id: 3, name: "João Batista Ferreira", email: "joao.ferreira@email.com", phone: "(91) 99876-5432", since: "2020-01-10", status: "ativo" },
-  { id: 4, name: "Raimunda Nonata Costa", email: "raimunda.costa@email.com", phone: "(91) 95555-4444", since: "2017-11-05", status: "ativo" },
-  { id: 5, name: "Antônio Carlos Souza", email: "antonio.souza@email.com", phone: "(91) 93333-2222", since: "2021-06-18", status: "inativo" },
-  { id: 6, name: "Francisca das Chagas Lima", email: "francisca.lima@email.com", phone: "(91) 97777-8888", since: "2016-09-30", status: "ativo" },
-  { id: 7, name: "Manoel Gomes Pereira", email: "manoel.pereira@email.com", phone: "(91) 96666-7777", since: "2023-02-14", status: "pendente" },
-];
-
-const newsData = [
-  { day: "20", month: "Jul", title: "Início da safra de castanha-do-pará 2026", desc: "As famílias associadas iniciaram a coleta da castanha-do-pará na temporada 2026. A expectativa é de uma produção de 15 toneladas, com preço médio de R$ 18/kg beneficiada.", tag: "Safra" },
-  { day: "15", month: "Jul", title: "Assembleia Geral Ordinária da ASPRORIOS", desc: "Convocamos todos os associados para a AGO que será realizada no dia 05 de agosto, às 14h, na sede da associação em Itatupã. Pauta: aprovação do relatório de atividades e prestação de contas.", tag: "Assembleia" },
-  { day: "08", month: "Jul", title: "Parceria com o ICMBio para monitoramento", desc: "Firmamos convênio com o ICMBio para monitoramento da fauna e flora na área de manejo da ASPRORIOS. Serão investidos R$ 80 mil em equipamentos e capacitação dos produtores.", tag: "Parceria" },
-  { day: "25", month: "Jun", title: "Curso de beneficiamento de cacau amazônico", desc: "Mais de 30 produtores participaram do curso de fermentação e secagem do cacau, ministrado pela EMATER-PA. Certificados foram entregues no encerramento.", tag: "Capacitação" },
-];
-
-const eventsData = [
-  { day: "05", month: "Ago", title: "Assembleia Geral Ordinária 2026", time: "14:00", location: "Sede da ASPRORIOS — Itatupã", desc: "Reunião com todos os associados para deliberar sobre os rumos da associação no próximo ano. Apresentação do relatório financeiro e eleição do conselho fiscal." },
-  { day: "12", month: "Ago", title: "Mutirão de Castanha — Colheita Coletiva", time: "06:00", location: "Área de Manejo — Rio Barbosa", desc: "Dia de colheita coletiva com as famílias associadas. Será realizado o beneficiamento in natura no local. Almoço comunitário incluso." },
-  { day: "20", month: "Ago", title: "Feira de Produtos da Floresta", time: "08:00 — 16:00", location: "Praça de Gurupá", desc: "Exposição e venda de castanha, cacau, açaí, óleos e artesanato dos produtores associados. Entrada gratuita." },
-  { day: "03", month: "Set", title: "Workshop de Manejo Florestal Sustentável", time: "09:00 — 17:00", location: "Sede da ASPRORIOS — Itatupã", desc: "Capacitação sobre técnicas de manejo de madeira, cálculo de volume e rastreabilidade, com certificação pelo SFB." },
-  { day: "15", month: "Set", title: "Festa da Castanha e da Floresta", time: "16:00", location: "Área de Lazer — Itatupã", desc: "Arraiá da ASPRORIOS com comidas típicas, música, dança e celebração da cultura ribeirinha. Toda a comunidade convidada!" },
-];
-
-function showSection(id, btn) {
-  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  if (btn) {
-    document.querySelectorAll(".nav-links button").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-  }
-  document.getElementById("navLinks").classList.remove("active");
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-function toggleMobileMenu() {
-  document.getElementById("navLinks").classList.toggle("active");
-}
-
-function animateValue(id, start, end, duration) {
-  const obj = document.getElementById(id);
-  let startTimestamp = null;
-  const step = (timestamp) => {
-    if (!startTimestamp) startTimestamp = timestamp;
-    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-    obj.innerHTML = Math.floor(progress * (end - start) + start);
-    if (progress < 1) window.requestAnimationFrame(step);
-  };
-  window.requestAnimationFrame(step);
-}
-
-function renderNews() {
-  const list = document.getElementById("newsList");
-  list.innerHTML = newsData.map(n => `
-    <div class="news-item">
-      <div class="news-date"><span class="day">${n.day}</span><span class="month">${n.month}</span></div>
-      <div class="news-content">
-        <h4>${n.title}</h4>
-        <p>${n.desc}</p>
-        <span class="tag">${n.tag}</span>
-      </div>
-    </div>
-  `).join("");
-}
-
-function renderEvents() {
-  const list = document.getElementById("eventsList");
-  list.innerHTML = eventsData.map(e => `
-    <div class="event-item">
-      <div class="event-date"><span class="day">${e.day}</span><span class="month">${e.month}</span></div>
-      <div class="event-content">
-        <h4>${e.title}</h4>
-        <p>🕐 ${e.time} &nbsp;|&nbsp; 📍 ${e.location}</p>
-        <p style="margin-top: 5px;">${e.desc}</p>
-      </div>
-    </div>
-  `).join("");
-}
-
-function renderMembers(data = members) {
-  const tbody = document.getElementById("membersTable");
-  tbody.innerHTML = data.map(m => `
-    <tr>
-      <td><strong>${m.name}</strong></td>
-      <td>${m.email}</td>
-      <td>${m.phone}</td>
-      <td>${formatDate(m.since)}</td>
-      <td><span class="status-badge status-${m.status}">${m.status.charAt(0).toUpperCase() + m.status.slice(1)}</span></td>
-      <td>
-        <button class="btn btn-danger" style="padding: 5px 11px; font-size: 0.75rem;" onclick="deleteMember(${m.id})">🗑️</button>
-      </td>
-    </tr>
-  `).join("");
-  document.getElementById("statMembers").textContent = members.filter(m => m.status === "ativo").length;
-}
-
-function formatDate(dateStr) {
-  const d = new Date(dateStr);
-  return d.toLocaleDateString("pt-BR");
-}
-
-function filterMembers() {
-  const search = document.getElementById("searchMember").value.toLowerCase();
-  const status = document.getElementById("filterStatus").value;
-  const filtered = members.filter(m => {
-    const matchSearch = m.name.toLowerCase().includes(search) || m.email.toLowerCase().includes(search);
-    const matchStatus = !status || m.status === status;
-    return matchSearch && matchStatus;
-  });
-  renderMembers(filtered);
-}
-
-function deleteMember(id) {
-  if (confirm("Tem certeza que deseja remover este associado?")) {
-    members = members.filter(m => m.id !== id);
-    filterMembers();
-    showToast("Associado removido com sucesso!");
-  }
-}
-
-function openModal() {
-  document.getElementById("modalOverlay").classList.add("active");
-  document.getElementById("newName").focus();
-}
-
-function closeModal() {
-  document.getElementById("modalOverlay").classList.remove("active");
-  document.getElementById("newName").value = "";
-  document.getElementById("newEmail").value = "";
-  document.getElementById("newPhone").value = "";
-  document.getElementById("newStatus").value = "ativo";
-}
-
-function addMember() {
-  const name = document.getElementById("newName").value.trim();
-  const email = document.getElementById("newEmail").value.trim();
-  const phone = document.getElementById("newPhone").value.trim();
-  const status = document.getElementById("newStatus").value;
-
-  if (!name || !email) {
-    showToast("Preencha nome e e-mail!", true);
-    return;
-  }
-
-  const newMember = {
-    id: Date.now(),
-    name,
-    email,
-    phone: phone || "-",
-    since: new Date().toISOString().split("T")[0],
-    status
-  };
-
-  members.unshift(newMember);
-  filterMembers();
-  closeModal();
-  showToast("Associado cadastrado com sucesso!");
-}
-
-function sendContact() {
-  const name = document.getElementById("contactName").value.trim();
-  const email = document.getElementById("contactEmail").value.trim();
-  const message = document.getElementById("contactMessage").value.trim();
-
-  if (!name || !email || !message) {
-    showToast("Preencha todos os campos obrigatórios!", true);
-    return;
-  }
-
-  document.getElementById("contactName").value = "";
-  document.getElementById("contactEmail").value = "";
-  document.getElementById("contactMessage").value = "";
-  showToast("Mensagem enviada com sucesso! Entraremos em contato em breve.");
-}
-
-function showToast(msg, isError = false) {
-  const toast = document.getElementById("toast");
-  toast.textContent = msg;
-  toast.className = "toast" + (isError ? " error" : "") + " show";
-  setTimeout(() => toast.classList.remove("show"), 3500);
-}
-
-function openLightbox(src, caption) {
-  document.getElementById("lightboxImg").src = src;
-  document.getElementById("lightboxCaption").textContent = caption;
-  document.getElementById("lightboxOverlay").classList.add("active");
-}
-
-function closeLightbox() {
-  document.getElementById("lightboxOverlay").classList.remove("active");
-}
-
-window.addEventListener("DOMContentLoaded", () => {
-  renderNews();
-  renderEvents();
-  renderMembers();
-  animateValue("statMembers", 0, members.filter(m => m.status === "ativo").length, 1500);
-  animateValue("statArea", 0, 2847, 2000);
-  animateValue("statYears", 0, 12, 1500);
-  animateValue("statProducts", 0, 6, 1500);
-});
-</script>
-
+        document.querySelectorAll('.atividade-card, .stat-item, .galeria-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
